@@ -5,19 +5,21 @@ import { within } from './within.js';
 
 class KDBush {
 
-    constructor({ points, getX, getY, getZ, nodeSize, ArrayType, axisCount }) {
+    constructor({ idList, points, getX, getY, getZ, nodeSize, ArrayType, axisCount }) {
         this.nodeSize = nodeSize;
         this.points = points;
         this.axisCount = axisCount;
 
         const IndexArrayType = points.length < 65536 ? Uint16Array : Uint32Array;
 
-        // store indices to the input array and coordinates in separate typed arrays
-        const ids = this.ids = new IndexArrayType(points.length);
+        const ids = this.ids = (idList || new IndexArrayType(points.length));
+
         const coords = this.coords = new ArrayType(points.length * axisCount);
 
         for (let i = 0; i < points.length; i++) {
-            ids[i] = i;
+
+            if (undefined === idList) ids[i] = i;
+
             coords[axisCount * i + 0] = getX(points[i]);
             coords[axisCount * i + 1] = getY(points[i]);
             coords[axisCount * i + 2] = getZ(points[i]);

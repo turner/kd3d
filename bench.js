@@ -3,9 +3,17 @@ import KDBush from './js/index.js';
 
 import { heapSize, randomPoint3d } from './js/utils.js';
 
-const extent = 5e2;
+const extent = 1e2;
 const points = [];
-for (let i = 0; i < 1e6; i++) points.push(randomPoint3d(extent));
+for (let i = 0; i < 4e4; i++) {
+    points.push(randomPoint3d(extent));
+}
+
+const keys = points.map((point, index) => (index * index).toString());
+let hash = {};
+points.forEach((point, index) => {
+    hash[ keys[ index] ] = point;
+} );
 
 console.log(`memory: ${  heapSize()}`);
 
@@ -14,6 +22,7 @@ console.time(`index ${  points.length  } points`);
 const axisCount = 3;
 const config =
     {
+        idList: points.map((points, index, array) => { return keys[ index ]; }),
         points,
         getX: p => p.x,
         getY: p => p.y,
@@ -59,14 +68,15 @@ for (let i = 0; i < queryCount; i++) {
 
     const ids = index.within(rangePt.x, rangePt.y, rangePt.z, 2);
 
-    // if (ids.length > 0) {
-    //
-    //     const pts = ids.map((id) => {
-    //         return index.points[ id ];
-    //     });
-    //
-    //     const guard = 707;
-    // }
+    if (ids.length > 0) {
+
+        const pts = ids.map((id) => {
+            // return index.points[ id ];
+            return hash[ id ];
+        });
+
+        const guard = 707;
+    }
 }
 
 console.timeEnd(queryCount + ' radial queries');
