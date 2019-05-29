@@ -12,21 +12,21 @@ class KDBush {
 
         const IndexArrayType = points.length < 65536 ? Uint16Array : Uint32Array;
 
-        const ids = this.ids = (idList || new IndexArrayType(points.length));
+        this.ids = idList ? idList.slice(0) : new IndexArrayType(points.length);
 
-        const coords = this.coords = new ArrayType(points.length * axisCount);
+        this.coords = new ArrayType(points.length * axisCount);
 
         for (let i = 0; i < points.length; i++) {
 
-            if (undefined === idList) ids[i] = i;
+            if (undefined === idList) this.ids[i] = i;
 
-            coords[axisCount * i + 0] = getX(points[i]);
-            coords[axisCount * i + 1] = getY(points[i]);
-            coords[axisCount * i + 2] = getZ(points[i]);
+            this.coords[axisCount * i + 0] = getX(points[i]);
+            this.coords[axisCount * i + 1] = getY(points[i]);
+            this.coords[axisCount * i + 2] = getZ(points[i]);
         }
 
         // kd-sort both arrays for efficient search (see comments in sort.js)
-        sortKD(ids, coords, nodeSize, 0, ids.length - 1, 0, axisCount);
+        sortKD(this.ids, this.coords, nodeSize, 0, this.ids.length - 1, 0, axisCount);
 
     }
 

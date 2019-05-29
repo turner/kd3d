@@ -22,7 +22,7 @@ console.time(`index ${  points.length  } points`);
 const axisCount = 3;
 const config =
     {
-        idList: points.map((points, index, array) => { return keys[ index ]; }),
+        idList: keys,
         points,
         getX: p => p.x,
         getY: p => p.y,
