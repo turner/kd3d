@@ -1,7 +1,7 @@
 node_modules
 package-lock.json
-kdbush.js
-kdbush.min.js
+kd3d.js
+kd3d.min.js
 yarn.lock
 /.idea
 .DS_Store

@@ -1,21 +1,19 @@
 {
-  "name": "kdbush",
-  "version": "3.0.0",
-  "description": "A very fast static 3D index for points based on kd-tree.",
+  "name": "kd3d",
+  "version": "1.0.0",
+  "description": "Extension of kdbush to 3D.",
   "module": "js/index.js",
-  "main": "kdbush.js",
-  "jsdelivr": "kdbush.min.js",
-  "unpkg": "kdbush.min.js",
+  "main": "kd3d.js",
+  "jsdelivr": "kd3d.min.js",
+  "unpkg": "kd3d.min.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mourner/kdbush.git"
+    "url": "git://github.com/turner/kd3d.git"
   },
   "devDependencies": {
     "esm": "^3.0.82",
-    "rollup": "^0.65.2",
     "rollup-plugin-buble": "^0.19.2",
-    "rollup-plugin-terser": "^2.0.2",
-    "tape": "^4.9.1"
+    "tape": "^4.10.2"
   },
   "scripts": {
     "test": "tape -r esm test.js",
@@ -33,10 +31,14 @@
     "geometry"
   ],
   "files": [
-    "kdbush.js",
-    "kdbush.min.js",
+    "kd3d.js",
+    "kd3d.min.js",
     "js"
   ],
-  "author": "Vladimir Agafonkin. Extended to 3D by Douglass Turner",
-  "license": "ISC"
+  "author": "Extended to 3D by Douglass Turner of work by Vladimir Agafonkin.",
+  "license": "ISC",
+  "dependencies": {
+    "rollup": "^1.13.1",
+    "rollup-plugin-terser": "^5.0.0"
+  }
 }
